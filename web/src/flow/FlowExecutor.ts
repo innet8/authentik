@@ -170,6 +170,18 @@ export class FlowExecutor extends AKElement implements StageHost {
                 padding-top: 0;
                 padding-bottom: 0;
             }
+            .hi-login-bg{
+                -webkit-font-smoothing: antialiased;
+                font-family: Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+                background-color:#000000;
+                overflow: hidden;
+            }
+            .hi-login__main{
+                background-color: rgb(255 255 255);
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                order-radius:0.5rem;
+            }
         `);
     }
 
@@ -527,35 +539,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                                             ${this.renderChallengeWrapper()}
                                         </div>
                                         <footer class="pf-c-login__footer">
-                                            <p>1231321313</p>
-                                            <ul class="pf-c-list pf-m-inline">
-                                                ${until(
-                                                    this.tenant?.uiFooterLinks?.map((link) => {
-                                                        return html`<li>
-                                                            <a href="${link.href || ""}"
-                                                                >${link.name}</a
-                                                            >
-                                                        </li>`;
-                                                    }),
-                                                )}
-                                                <li>
-                                                    <a
-                                                        href="https://goauthentik.io?utm_source=authentik&amp;utm_medium=flow"
-                                                        >${t`Powered by authentik`}</a
-                                                    >
-                                                </li>
-                                                ${this.flowInfo?.background?.startsWith("/static")
-                                                    ? html`
-                                                          <p>test1212312313</p>
-                                                          <li>
-                                                              <a
-                                                                  href="https://unsplash.com/@saishmenon"
-                                                                  >${t`Background image`}</a
-                                                              >
-                                                          </li>
-                                                      `
-                                                    : html``}
-                                            </ul>
+                                            
                                         </footer>
                                     </div>
                                 </div>
