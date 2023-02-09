@@ -527,7 +527,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                                             ${this.renderChallengeWrapper()}
                                         </div>
                                         <footer class="pf-c-login__footer">
-                                            <p></p>
+                                            <p>1231321313</p>
                                             <ul class="pf-c-list pf-m-inline">
                                                 ${until(
                                                     this.tenant?.uiFooterLinks?.map((link) => {
@@ -546,6 +546,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                                                 </li>
                                                 ${this.flowInfo?.background?.startsWith("/static")
                                                     ? html`
+                                                          <p>test1212312313</p>
                                                           <li>
                                                               <a
                                                                   href="https://unsplash.com/@saishmenon"
