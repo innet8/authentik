@@ -25,6 +25,14 @@ docker-compose pull
 
 docker-compose up -d
 
+进入页面
+
+cd web
+
+npm i
+
+npm run watch
+
 
 
 
