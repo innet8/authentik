@@ -6,7 +6,7 @@ import { PasswordManagerPrefill } from "@goauthentik/flow/stages/identification/
 
 import { t } from "@lingui/macro";
 
-import { CSSResult, TemplateResult, html } from "lit";
+import { CSSResult, TemplateResult, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -23,7 +23,36 @@ import { PasswordChallenge, PasswordChallengeResponseRequest } from "@goauthenti
 @customElement("ak-stage-password")
 export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChallengeResponseRequest> {
     static get styles(): CSSResult[] {
-        return [PFBase, PFLogin, PFForm, PFFormControl, PFButton, PFTitle, AKGlobal];
+        return [
+            PFBase,
+            PFLogin,
+            PFForm,
+            PFFormControl,
+            PFButton,
+            PFTitle,
+            AKGlobal,
+            css`
+                .pf-c-login__main-body{
+                    padding-top: 4rem;
+                }
+                .pf-c-form-control:not(textarea){
+                    box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
+                    padding: 0.5rem 0.75rem;
+                    border: 1px solid rgb(209, 213, 219);
+                    border-radius: 0.375rem;
+                    margin-top: 0.25rem;
+                }
+                .pf-c-button.pf-m-primary{
+                    padding-top: 0.5rem;
+                    padding-bottom: 0.5rem;
+                    border-radius: 0.375rem;
+                    box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
+                }
+                .pf-c-form__group.pf-m-action{
+                    margin-top: 1.5rem;
+                }
+            `,
+        ];
     }
 
     input?: HTMLInputElement;
@@ -76,9 +105,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
         if (!this.challenge) {
             return html`<ak-empty-state ?loading="${true}" header=${t`Loading`}> </ak-empty-state>`;
         }
-        return html`<header class="pf-c-login__main-header">
-                <h1 class="pf-c-title pf-m-3xl">${this.challenge.flowInfo?.title}</h1>
-            </header>
+        return html`
             <div class="pf-c-login__main-body">
                 <form
                     class="pf-c-form"

@@ -1,7 +1,7 @@
 import { AKElement } from "@goauthentik/elements/Base";
 
 import { CSSResult } from "lit";
-import { TemplateResult, html } from "lit";
+import { TemplateResult, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 import PFForm from "@patternfly/patternfly/components/Form/form.css";
@@ -12,7 +12,18 @@ import { ErrorDetail } from "@goauthentik/api";
 @customElement("ak-form-element")
 export class FormElement extends AKElement {
     static get styles(): CSSResult[] {
-        return [PFForm, PFFormControl];
+        return [
+            PFForm,
+            PFFormControl,
+            css`
+                .pf-c-form__label-text{
+                    color: rgb(55, 65, 81);
+                    font-weight: 500;
+                    font-size: .875rem;
+                    line-height: 1.25rem;
+                }
+            `,
+        ];
     }
 
     @property()

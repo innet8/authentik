@@ -121,68 +121,40 @@ export class FlowExecutor extends AKElement implements StageHost {
     ws: WebsocketClient;
 
     static get styles(): CSSResult[] {
-        return [PFBase, PFLogin, PFDrawer, PFButton, PFTitle, PFList, PFBackgroundImage, AKGlobal]
-            .concat(css`
-            .ak-hidden {
-                display: none;
-            }
-            :host {
-                position: relative;
-            }
-            .pf-c-drawer__content {
-                background-color: transparent;
-            }
-            /* layouts */
-            .pf-c-login__container.content-right {
-                grid-template-areas:
-                    "header main"
-                    "footer main"
-                    ". main";
-            }
-            .pf-c-login.sidebar_left {
-                justify-content: flex-start;
-                padding-top: 0;
-                padding-bottom: 0;
-            }
-            .pf-c-login.sidebar_left .ak-login-container,
-            .pf-c-login.sidebar_right .ak-login-container {
-                height: 100vh;
-                background-color: var(--pf-c-login__main--BackgroundColor);
-                padding-left: var(--pf-global--spacer--lg);
-                padding-right: var(--pf-global--spacer--lg);
-            }
-            .pf-c-login.sidebar_left .pf-c-list,
-            .pf-c-login.sidebar_right .pf-c-list {
-                color: #000;
-            }
-            @media (prefers-color-scheme: dark) {
-                .pf-c-login.sidebar_left .ak-login-container,
-                .pf-c-login.sidebar_right .ak-login-container {
-                    background-color: var(--ak-dark-background);
+        return [
+            PFBase,
+            PFLogin,
+            PFDrawer,
+            PFButton,
+            PFTitle,
+            PFList,
+            PFBackgroundImage,
+            AKGlobal,
+            css`
+                .pf-c-drawer__body{
+                    background-color: rgb(249, 250, 251);
                 }
-                .pf-c-login.sidebar_left .pf-c-list,
-                .pf-c-login.sidebar_right .pf-c-list {
-                    color: var(--ak-dark-foreground);
+                .pf-c-login__main{
+                    background-color: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0 1px 3px 0 rgb(0, 0, 0, .1),0 1px 2px -1px rgb(0, 0, 0, .1);
                 }
-            }
-            .pf-c-login.sidebar_right {
-                justify-content: flex-end;
-                padding-top: 0;
-                padding-bottom: 0;
-            }
-            .hi-login-bg{
-                -webkit-font-smoothing: antialiased;
-                font-family: Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-                background-color:#000000;
-                overflow: hidden;
-            }
-            .hi-login__main{
-                background-color: rgb(255 255 255);
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-                order-radius:0.5rem;
-            }
-        `);
+                .pf-c-login-header{
+                    flex-grow: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: end;
+                    padding-bottom: 2rem;
+                }
+                .pf-c-login-title{
+                    color: rgb(17, 24, 39);
+                    letter-spacing: -.025em;
+                    font-weight: 700;
+                    font-size: 1.875rem;
+                    line-height: 2.25rem;
+                }
+            `
+        ];
     }
 
     constructor() {
@@ -519,21 +491,16 @@ export class FlowExecutor extends AKElement implements StageHost {
     }
 
     render(): TemplateResult {
-        return html`<div class="pf-c-background-image">${this.renderBackgroundOverlay()}</div>
+        return html`
             <div class="pf-c-page__drawer">
                 <div class="pf-c-drawer ${this.inspectorOpen ? "pf-m-expanded" : "pf-m-collapsed"}">
                     <div class="pf-c-drawer__main">
                         <div class="pf-c-drawer__content">
                             <div class="pf-c-drawer__body">
                                 <div class="pf-c-login ${this.getLayout()}">
-                                    <div class="${this.getLayoutClass()}">
-                                        <header class="pf-c-login__header">
-                                            <div class="pf-c-brand ak-brand">
-                                                <img
-                                                    src="${first(this.tenant?.brandingLogo, "")}"
-                                                    alt="authentik Logo"
-                                                />
-                                            </div>
+                                        <div class="${this.getLayoutClass()}">
+                                        <header class="pf-c-login-header">
+                                            <h3 class="pf-c-login-title">${this.challenge?.flowInfo?.title}</h3>
                                         </header>
                                         <div class="pf-c-login__main">
                                             ${this.renderChallengeWrapper()}
