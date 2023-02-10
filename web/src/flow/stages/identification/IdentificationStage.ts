@@ -70,30 +70,47 @@ export class IdentificationStage extends BaseStage<
                     height: 100%;
                     max-height: var(--pf-c-login__main-footer-links-item-link-svg--Height);
                 }
+                .pf-c-login-title{
+                    font-family: 'Inter';
+                    font-weight: 800;
+                    font-size: 30px;
+                    line-height: 36px;
+                    text-align: center;
+                    color: #1A2138;
+                    margin-bottom: 2rem;
+                }
                 .pf-c-login__main-body{
                     padding-top: 2rem;
+                    padding-bottom: 4rem;
                 }
-                .pf-c-form-control:not(textarea){
+                .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    padding: 0.5rem 0.75rem;
-                    border: 1px solid rgb(209, 213, 219);
-                    border-radius: 0.375rem;
+                    padding: 0 0.75rem;
+                    background-color: #FFFFFF;
+                    border: 1px solid #EDF1F7;
+                    border-radius: 6px;
                     margin-top: 0.25rem;
-                    height: 42px;
+                    height: 48px !important;
+                    line-height: 48px;
                 }
                 .pf-c-form-control:focus{
                     padding: 0.5rem 0.75rem;
                     border-bottom-width: 1px;
+                    border-color: #3366FF;
                 }
                 .pf-c-button.pf-m-primary{
-                    padding-top: 0.5rem;
-                    padding-bottom: 0.5rem;
-                    border-radius: 0.375rem;
-                    box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    height: 42px;
+                    padding: 0 0.75rem;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+                    border-radius: 6px;
+                    height: 48px;
+                    line-height: 48px;
+                    background-color: #3366FF;
+                }
+                .pf-c-button.pf-m-primary:hover, .pf-c-button.pf-m-primary:focus{
+                    background-color: #0a48ff;
                 }
                 .pf-c-form__group.pf-m-action{
-                    margin-top: 1.5rem;
+                    margin-top: 0;
                 }
             `,
         );
@@ -239,16 +256,16 @@ export class IdentificationStage extends BaseStage<
         const label = OR_LIST_FORMATTERS.format(fields.map((f) => uiFields[f]));
         // console.log(label);
         return html`<ak-form-element
-                label="${t`Email`}"
+                label="${t`Email address`}"
                 ?required="${true}"
                 class="pf-c-form__group"
-                .errors=${(this.challenge.responseErrors || {})["uid_field"]}
+                .errors=${(this.challenge.responseErrors || {})["non_field_errors"]}
             >
                 <!-- @ts-ignore -->
                 <input
                     type=${type}
                     name="uidField"
-                    placeholder="${t`Please enter your email`}"
+                    placeholder="${t`you@example.com`}"
                     autofocus=""
                     autocomplete="username"
                     class="pf-c-form-control"
@@ -275,9 +292,6 @@ export class IdentificationStage extends BaseStage<
                       </ak-form-element>
                   `
                 : html``}
-            ${"non_field_errors" in (this.challenge?.responseErrors || {})
-                ? this.renderNonFieldErrors(this.challenge?.responseErrors?.non_field_errors || [])
-                : html``}
             <div class="pf-c-form__group pf-m-action">
                 <button type="submit" class="pf-c-button pf-m-primary pf-m-block">
                     ${this.challenge.primaryAction}
@@ -302,6 +316,7 @@ export class IdentificationStage extends BaseStage<
         }
         return html`
             <div class="pf-c-login__main-body">
+                <h3 class="pf-c-login-title">${this.challenge?.flowInfo?.title}</h3>
                 <form
                     class="pf-c-form"
                     @submit=${(e: Event) => {

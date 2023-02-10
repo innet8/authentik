@@ -132,12 +132,11 @@ export class FlowExecutor extends AKElement implements StageHost {
             AKGlobal,
             css`
                 .pf-c-drawer__body{
-                    background-color: rgb(249, 250, 251);
+                    background-color: #EDF1F7;
                 }
                 .pf-c-login__main{
                     background-color: #fff;
-                    border-radius: 15px;
-                    box-shadow: 0 1px 3px 0 rgb(0, 0, 0, .1),0 1px 2px -1px rgb(0, 0, 0, .1);
+                    border-radius: 8px;
                 }
                 .pf-c-login-header{
                     flex-grow: 1;
@@ -145,13 +144,6 @@ export class FlowExecutor extends AKElement implements StageHost {
                     justify-content: center;
                     align-items: end;
                     padding-bottom: 2rem;
-                }
-                .pf-c-login-title{
-                    color: rgb(17, 24, 39);
-                    letter-spacing: -.025em;
-                    font-weight: 700;
-                    font-size: 1.875rem;
-                    line-height: 2.25rem;
                 }
             `
         ];
@@ -500,7 +492,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                                 <div class="pf-c-login ${this.getLayout()}">
                                         <div class="${this.getLayoutClass()}">
                                         <header class="pf-c-login-header">
-                                            <h3 class="pf-c-login-title">${this.challenge?.flowInfo?.title}</h3>
+
                                         </header>
                                         <div class="pf-c-login__main">
                                             ${this.renderChallengeWrapper()}

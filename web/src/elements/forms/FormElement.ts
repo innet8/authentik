@@ -22,6 +22,9 @@ export class FormElement extends AKElement {
                     font-size: .875rem;
                     line-height: 1.25rem;
                 }
+                .pf-c-form__helper-text.pf-m-error{
+                    margin-bottom: 0;
+                }
             `,
         ];
     }

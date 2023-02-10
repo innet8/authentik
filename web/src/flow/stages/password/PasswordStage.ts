@@ -32,30 +32,60 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
             PFTitle,
             AKGlobal,
             css`
+                .pf-c-login-title{
+                    font-family: 'Inter';
+                    font-weight: 800;
+                    font-size: 30px;
+                    line-height: 36px;
+                    text-align: center;
+                    color: #1A2138;
+                    margin-bottom: 2rem;
+                }
                 .pf-c-login__main-body{
                     padding-top: 2rem;
+                    padding-bottom: 4rem;
                 }
-                .pf-c-form-control:not(textarea){
+                .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    padding: 0.5rem 0.75rem;
-                    border: 1px solid rgb(209, 213, 219);
-                    border-radius: 0.375rem;
+                    padding: 0 0.75rem;
+                    background-color: #FFFFFF;
+                    border: 1px solid #EDF1F7;
+                    border-radius: 6px;
                     margin-top: 0.25rem;
-                    height: 42px;
+                    height: 48px !important;
+                    line-height: 48px;
                 }
                 .pf-c-form-control:focus{
                     padding: 0.5rem 0.75rem;
                     border-bottom-width: 1px;
+                    border-color: #3366FF;
                 }
                 .pf-c-button.pf-m-primary{
-                    padding-top: 0.5rem;
-                    padding-bottom: 0.5rem;
-                    border-radius: 0.375rem;
-                    box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    height: 42px;
+                    padding: 0 0.75rem;
+                    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+                    border-radius: 6px;
+                    height: 48px;
+                    line-height: 48px;
+                    background-color: #3366FF;
+                }
+                .pf-c-button.pf-m-primary:hover, .pf-c-button.pf-m-primary:focus{
+                    background-color: #0a48ff;
                 }
                 .pf-c-form__group.pf-m-action{
-                    margin-top: 1.5rem;
+                    margin-top: 0;
+                }
+                .pf-c-form__label{
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .pf-c-form__label a{
+                    color: #3366FF;
+                }
+                .pf-c-form__label .pf-c-form__label-text{
+                    color: rgb(55, 65, 81);
+                    font-weight: 500;
+                    font-size: 0.875rem;
+                    line-height: 1.25rem;
                 }
             `,
         ];
@@ -108,34 +138,32 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
     }
 
     render(): TemplateResult {
+        // console.log(this.challenge);
         if (!this.challenge) {
             return html`<ak-empty-state ?loading="${true}" header=${t`Loading`}> </ak-empty-state>`;
         }
         return html`
             <div class="pf-c-login__main-body">
+                <h3 class="pf-c-login-title">${this.challenge?.flowInfo?.title}</h3>
                 <form
                     class="pf-c-form"
                     @submit=${(e: Event) => {
                         this.submitForm(e);
                     }}
                 >
-                    <ak-form-static
-                        class="pf-c-form__group"
-                        userAvatar="${this.challenge.pendingUserAvatar}"
-                        user=${this.challenge.pendingUser}
-                    >
-                        <div slot="link">
-                            <a href="${ifDefined(this.challenge.flowInfo?.cancelUrl)}"
-                                >${t`Not you?`}</a
-                            >
-                        </div>
-                    </ak-form-static>
                     <input
                         name="username"
                         autocomplete="username"
                         type="hidden"
                         value="${this.challenge.pendingUser}"
                     />
+                    <div class="pf-c-form__group">
+                        <label class="pf-c-form__label">
+                            <span class="pf-c-form__label-text">${t`Username`}</span>
+                            <a href="${ifDefined(this.challenge.flowInfo?.cancelUrl)}">${t`Not you?`}</a>
+                        </label>
+                        <input class="pf-c-form-control" disabled value="${this.challenge.pendingUser}"/>
+                    </div>
                     <ak-form-element
                         label="${t`Password`}"
                         ?required="${true}"
