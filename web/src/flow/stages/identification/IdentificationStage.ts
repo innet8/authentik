@@ -80,6 +80,10 @@ export class IdentificationStage extends BaseStage<
                     border-radius: 0.375rem;
                     margin-top: 0.25rem;
                 }
+                .pf-c-form-control:focus{
+                    padding: 0.5rem 0.75rem;
+                    border-bottom-width: 1px;
+                }
                 .pf-c-button.pf-m-primary{
                     padding-top: 0.5rem;
                     padding-bottom: 0.5rem;
