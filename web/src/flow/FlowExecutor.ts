@@ -136,7 +136,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                 }
                 .pf-c-login__main{
                     background-color: #fff;
-                    border-radius: 5px;
+                    border-radius: 15px;
                     box-shadow: 0 1px 3px 0 rgb(0, 0, 0, .1),0 1px 2px -1px rgb(0, 0, 0, .1);
                 }
                 .pf-c-login-header{

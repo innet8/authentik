@@ -71,7 +71,7 @@ export class IdentificationStage extends BaseStage<
                     max-height: var(--pf-c-login__main-footer-links-item-link-svg--Height);
                 }
                 .pf-c-login__main-body{
-                    padding-top: 4rem;
+                    padding-top: 2rem;
                 }
                 .pf-c-form-control:not(textarea){
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
@@ -79,6 +79,7 @@ export class IdentificationStage extends BaseStage<
                     border: 1px solid rgb(209, 213, 219);
                     border-radius: 0.375rem;
                     margin-top: 0.25rem;
+                    height: 42px;
                 }
                 .pf-c-form-control:focus{
                     padding: 0.5rem 0.75rem;
@@ -89,6 +90,7 @@ export class IdentificationStage extends BaseStage<
                     padding-bottom: 0.5rem;
                     border-radius: 0.375rem;
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
+                    height: 42px;
                 }
                 .pf-c-form__group.pf-m-action{
                     margin-top: 1.5rem;
@@ -235,8 +237,9 @@ export class IdentificationStage extends BaseStage<
             [UserFieldsEnum.Upn]: t`UPN`,
         };
         const label = OR_LIST_FORMATTERS.format(fields.map((f) => uiFields[f]));
+        // console.log(label);
         return html`<ak-form-element
-                label=${label}
+                label="${t`Email`}"
                 ?required="${true}"
                 class="pf-c-form__group"
                 .errors=${(this.challenge.responseErrors || {})["uid_field"]}
@@ -245,7 +248,7 @@ export class IdentificationStage extends BaseStage<
                 <input
                     type=${type}
                     name="uidField"
-                    placeholder=${label}
+                    placeholder="${t`Please enter your email`}"
                     autofocus=""
                     autocomplete="username"
                     class="pf-c-form-control"
@@ -310,14 +313,14 @@ export class IdentificationStage extends BaseStage<
                         : html``}
                     ${this.renderInput()}
                 </form>
-            </div>
-            <footer class="pf-c-login__main-footer">
-                <ul class="pf-c-login__main-footer-links">
-                    ${(this.challenge.sources || []).map((source) => {
-                        return this.renderSource(source);
-                    })}
-                </ul>
-                ${this.renderFooter()}
-            </footer>`;
+            </div>`;
+            // <footer class="pf-c-login__main-footer">
+            //     <ul class="pf-c-login__main-footer-links">
+            //         ${(this.challenge.sources || []).map((source) => {
+            //             return this.renderSource(source);
+            //         })}
+            //     </ul>
+            //     ${this.renderFooter()}
+            // </footer>`;
     }
 }

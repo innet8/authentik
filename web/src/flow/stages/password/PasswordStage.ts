@@ -33,7 +33,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
             AKGlobal,
             css`
                 .pf-c-login__main-body{
-                    padding-top: 4rem;
+                    padding-top: 2rem;
                 }
                 .pf-c-form-control:not(textarea){
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
@@ -41,6 +41,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     border: 1px solid rgb(209, 213, 219);
                     border-radius: 0.375rem;
                     margin-top: 0.25rem;
+                    height: 42px;
                 }
                 .pf-c-form-control:focus{
                     padding: 0.5rem 0.75rem;
@@ -51,6 +52,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     padding-bottom: 0.5rem;
                     border-radius: 0.375rem;
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
+                    height: 42px;
                 }
                 .pf-c-form__group.pf-m-action{
                     margin-top: 1.5rem;
@@ -153,9 +155,9 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         </button>
                     </div>
                 </form>
-            </div>
-            <footer class="pf-c-login__main-footer">
-                <ul class="pf-c-login__main-footer-links"></ul>
-            </footer>`;
+            </div>`;
+            // <footer class="pf-c-login__main-footer">
+            //     <ul class="pf-c-login__main-footer-links"></ul>
+            // </footer>`;
     }
 }
