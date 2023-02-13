@@ -47,7 +47,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                 }
                 .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    padding: 0 0.75rem;
+                    padding: 0 40px;
                     background-color: #FFFFFF;
                     border: 1px solid #EDF1F7;
                     border-radius: 6px;
@@ -56,12 +56,27 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     line-height: 48px;
                 }
                 .pf-c-form-control:focus{
-                    padding: 0.5rem 0.75rem;
+                    padding: 0 40px;
                     border-bottom-width: 1px;
                     border-color: #3366FF;
                 }
+                input::input-placeholder{
+                    color:#8F9BB3 !important;
+                }
+                input::-webkit-input-placeholder{
+                    color:#8F9BB3 !important;
+                }
+                input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+                    color:#8F9BB3 !important;
+                }
+                input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+                    color:#8F9BB3 !important;
+                }
+                input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+                    color:#8F9BB3 !important;
+                }
                 .pf-c-button.pf-m-primary{
-                    padding: 0 0.75rem;
+                    padding: 0;
                     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
                     border-radius: 6px;
                     height: 48px;
@@ -86,6 +101,19 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     font-weight: 500;
                     font-size: 0.875rem;
                     line-height: 1.25rem;
+                }
+                .input-item{
+                    position: relative;
+                }
+                .input-item .first{
+                    position: absolute;
+                    left: 15px;
+                    top: 20px;
+                }
+                .input-item .last{
+                    position: absolute;
+                    right: 15px;
+                    top: 20px;
                 }
             `,
         ];
@@ -162,7 +190,10 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                             <span class="pf-c-form__label-text">${t`Username`}</span>
                             <a href="${ifDefined(this.challenge.flowInfo?.cancelUrl)}">${t`Not you?`}</a>
                         </label>
-                        <input class="pf-c-form-control" disabled value="${this.challenge.pendingUser}"/>
+                        <div class="input-item">
+                            <i class="fas fa-user first" style="color: #9CA3AF;"></i>
+                            <input class="pf-c-form-control" disabled value="${this.challenge.pendingUser}"/>
+                        </div>
                     </div>
                     <ak-form-element
                         label="${t`Password`}"
@@ -170,7 +201,10 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         class="pf-c-form__group"
                         .errors=${(this.challenge?.responseErrors || {})["password"]}
                     >
-                        ${this.renderInput()}
+                        <div class="input-item">
+                            <i class="fas fa-lock first" style="color: #9CA3AF;"></i>
+                            ${this.renderInput()}
+                        </div>
                     </ak-form-element>
 
                     ${this.challenge.recoveryUrl

@@ -85,7 +85,7 @@ export class IdentificationStage extends BaseStage<
                 }
                 .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
-                    padding: 0 0.75rem;
+                    padding: 0 40px;
                     background-color: #FFFFFF;
                     border: 1px solid #EDF1F7;
                     border-radius: 6px;
@@ -94,12 +94,27 @@ export class IdentificationStage extends BaseStage<
                     line-height: 48px;
                 }
                 .pf-c-form-control:focus{
-                    padding: 0.5rem 0.75rem;
+                    padding: 0 40px;
                     border-bottom-width: 1px;
                     border-color: #3366FF;
                 }
+                input::input-placeholder{
+                    color:#8F9BB3 !important;
+                }
+                input::-webkit-input-placeholder{
+                    color:#8F9BB3 !important;
+                }
+                input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+                    color:#8F9BB3 !important;
+                }
+                input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+                    color:#8F9BB3 !important;
+                }
+                input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+                    color:#8F9BB3 !important;
+                }
                 .pf-c-button.pf-m-primary{
-                    padding: 0 0.75rem;
+                    padding: 0;
                     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
                     border-radius: 6px;
                     height: 48px;
@@ -111,6 +126,19 @@ export class IdentificationStage extends BaseStage<
                 }
                 .pf-c-form__group.pf-m-action{
                     margin-top: 0;
+                }
+                .input-item{
+                    position: relative;
+                }
+                .input-item .first{
+                    position: absolute;
+                    left: 15px;
+                    top: 20px;
+                }
+                .input-item .last{
+                    position: absolute;
+                    right: 15px;
+                    top: 20px;
                 }
             `,
         );
@@ -262,15 +290,18 @@ export class IdentificationStage extends BaseStage<
                 .errors=${(this.challenge.responseErrors || {})["non_field_errors"]}
             >
                 <!-- @ts-ignore -->
-                <input
-                    type=${type}
-                    name="uidField"
-                    placeholder="${t`you@example.com`}"
-                    autofocus=""
-                    autocomplete="username"
-                    class="pf-c-form-control"
-                    required
-                />
+                <div class="input-item">
+                    <i class="fas fa-envelope first" style="color: #9CA3AF;"></i>
+                    <input
+                        type=${type}
+                        name="uidField"
+                        placeholder="${t`you@example.com`}"
+                        autofocus=""
+                        autocomplete="username"
+                        class="pf-c-form-control"
+                        required
+                    />
+                </div>
             </ak-form-element>
             ${this.challenge.passwordFields
                 ? html`
