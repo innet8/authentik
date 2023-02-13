@@ -96,7 +96,7 @@ export class IdentificationStage extends BaseStage<
                 .pf-c-form-control:focus{
                     padding: 0 40px;
                     border-bottom-width: 1px;
-                    border-color: #3366FF;
+                    outline-color: #3366FF;
                 }
                 input::input-placeholder{
                     color:#8F9BB3 !important;
@@ -139,6 +139,17 @@ export class IdentificationStage extends BaseStage<
                     position: absolute;
                     right: 15px;
                     top: 20px;
+                    display: none;
+                }
+                .input-item.error .pf-c-form-control{
+                    color: #DB2E33 !important;
+                    border-color: #FF9C82 !important;
+                }
+                .input-item.error .pf-c-form-control:focus{
+                    outline-color: #FF9C82 !important;
+                }
+                .input-item.error .last{
+                    display: block;
                 }
             `,
         );
@@ -291,7 +302,7 @@ export class IdentificationStage extends BaseStage<
             >
                 <!-- @ts-ignore -->
                 <div class="input-item">
-                    <i class="fas fa-envelope first" style="color: #9CA3AF;"></i>
+                    <i class="fa fa-envelope first" style="color: #9CA3AF;"></i>
                     <input
                         type=${type}
                         name="uidField"
@@ -301,6 +312,7 @@ export class IdentificationStage extends BaseStage<
                         class="pf-c-form-control"
                         required
                     />
+                    <i class="fa fa-exclamation-circle last" style="color: #DB232C;"></i>
                 </div>
             </ak-form-element>
             ${this.challenge.passwordFields

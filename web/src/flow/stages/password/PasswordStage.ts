@@ -58,7 +58,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                 .pf-c-form-control:focus{
                     padding: 0 40px;
                     border-bottom-width: 1px;
-                    border-color: #3366FF;
+                    outline-color: #3366FF;
                 }
                 input::input-placeholder{
                     color:#8F9BB3 !important;
@@ -114,6 +114,17 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     position: absolute;
                     right: 15px;
                     top: 20px;
+                    display: none;
+                }
+                .input-item.error .pf-c-form-control{
+                    color: #DB2E33 !important;
+                    border-color: #FF9C82 !important;
+                }
+                .input-item.error .pf-c-form-control:focus{
+                    outline-color: #FF9C82 !important;
+                }
+                .input-item.error .last{
+                    display: block;
                 }
             `,
         ];
@@ -204,6 +215,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         <div class="input-item">
                             <i class="fas fa-lock first" style="color: #9CA3AF;"></i>
                             ${this.renderInput()}
+                            <i class="fa fa-exclamation-circle last" style="color: #DB232C;"></i>
                         </div>
                     </ak-form-element>
 
