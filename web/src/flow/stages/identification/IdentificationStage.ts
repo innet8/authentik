@@ -6,7 +6,7 @@ import { BaseStage } from "@goauthentik/flow/stages/base";
 import { t } from "@lingui/macro";
 
 import { CSSResult, TemplateResult, css, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 import AKGlobal from "@goauthentik/common/styles/authentik.css";
 import PFAlert from "@patternfly/patternfly/components/Alert/alert.css";
@@ -43,6 +43,14 @@ export class IdentificationStage extends BaseStage<
     IdentificationChallengeResponseRequest
 > {
     form?: HTMLFormElement;
+    // 
+    @property({ type: Boolean })
+    hasErrors?: boolean;
+
+    constructor() {
+        super();
+        this.hasErrors = false;
+    }
 
     static get styles(): CSSResult[] {
         return [
@@ -301,7 +309,7 @@ export class IdentificationStage extends BaseStage<
                 .errors=${(this.challenge.responseErrors || {})["non_field_errors"]}
             >
                 <!-- @ts-ignore -->
-                <div class="input-item">
+                <div class="input-item ${this.hasErrors ? "error" : ""}">
                     <i class="fa fa-envelope first" style="color: #9CA3AF;"></i>
                     <input
                         type=${type}
@@ -311,28 +319,31 @@ export class IdentificationStage extends BaseStage<
                         autocomplete="username"
                         class="pf-c-form-control"
                         required
+                        @input=${() => {
+                            if(this.hasErrors) this.hasErrors = false;
+                        }}
                     />
                     <i class="fa fa-exclamation-circle last" style="color: #DB232C;"></i>
                 </div>
             </ak-form-element>
             ${this.challenge.passwordFields
                 ? html`
-                      <ak-form-element
-                          label="${t`Password`}"
-                          ?required="${true}"
-                          class="pf-c-form__group"
-                          .errors=${(this.challenge.responseErrors || {})["password"]}
-                      >
-                          <input
-                              type="password"
-                              name="password"
-                              placeholder="${t`Password`}"
-                              autocomplete="current-password"
-                              class="pf-c-form-control"
-                              required
-                              value=${PasswordManagerPrefill.password || ""}
-                          />
-                      </ak-form-element>
+                    <ak-form-element
+                        label="${t`Password`}"
+                        ?required="${true}"
+                        class="pf-c-form__group"
+                        .errors=${(this.challenge.responseErrors || {})["password"]}
+                    >
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="${t`Password`}"
+                            autocomplete="current-password"
+                            class="pf-c-form-control"
+                            required
+                            value=${PasswordManagerPrefill.password || ""}
+                        />
+                    </ak-form-element>
                   `
                 : html``}
             <div class="pf-c-form__group pf-m-action">
@@ -363,7 +374,9 @@ export class IdentificationStage extends BaseStage<
                 <form
                     class="pf-c-form"
                     @submit=${(e: Event) => {
-                        this.submitForm(e);
+                        this.submitForm(e).finally(() => {
+                            if(!this.hasErrors) this.hasErrors = true;
+                        });
                     }}
                 >
                     ${this.challenge.applicationPre

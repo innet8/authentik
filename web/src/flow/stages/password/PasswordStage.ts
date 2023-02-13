@@ -7,7 +7,7 @@ import { PasswordManagerPrefill } from "@goauthentik/flow/stages/identification/
 import { t } from "@lingui/macro";
 
 import { CSSResult, TemplateResult, css, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 import AKGlobal from "@goauthentik/common/styles/authentik.css";
@@ -133,6 +133,14 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
     input?: HTMLInputElement;
 
     timer?: number;
+    // 
+    @property({ type: Boolean })
+    hasErrors?: boolean;
+
+    constructor() {
+        super();
+        this.hasErrors = false;
+    }
 
     renderInput(): HTMLInputElement {
         this.input = document.createElement("input");
@@ -144,6 +152,10 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
         this.input.classList.add("pf-c-form-control");
         this.input.required = true;
         this.input.value = PasswordManagerPrefill.password || "";
+        // 
+        this.input.oninput=()=>{
+            if(this.hasErrors) this.hasErrors = false;
+        };
         // This is somewhat of a crude way to get autofocus, but in most cases the `autofocus` attribute
         // isn't enough, due to timing within shadow doms and such.
         this.timer = window.setInterval(() => {
@@ -187,7 +199,9 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                 <form
                     class="pf-c-form"
                     @submit=${(e: Event) => {
-                        this.submitForm(e);
+                        this.submitForm(e).finally(() => {
+                            if(!this.hasErrors) this.hasErrors = true;
+                        });
                     }}
                 >
                     <input
@@ -212,9 +226,20 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         class="pf-c-form__group"
                         .errors=${(this.challenge?.responseErrors || {})["password"]}
                     >
-                        <div class="input-item">
+                        <div class="input-item ${this.hasErrors ? "error" : ""}">
                             <i class="fas fa-lock first" style="color: #9CA3AF;"></i>
-                            ${this.renderInput()}
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="${t`Please enter your password`}"
+                                autofocus=""
+                                autocomplete="current-password"
+                                class="pf-c-form-control"
+                                required
+                                @input=${() => {
+                                    if(this.hasErrors) this.hasErrors = false;
+                                }}
+                            />
                             <i class="fa fa-exclamation-circle last" style="color: #DB232C;"></i>
                         </div>
                     </ak-form-element>
