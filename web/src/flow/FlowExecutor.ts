@@ -419,7 +419,6 @@ export class FlowExecutor extends AKElement implements StageHost {
             return html`<ak-empty-state ?loading=${true} header=${t`Loading`}> </ak-empty-state>`;
         }
         return html`
-            ${this.loading ? html`<ak-loading-overlay></ak-loading-overlay>` : html``}
             ${until(this.renderChallenge())}
         `;
     }
