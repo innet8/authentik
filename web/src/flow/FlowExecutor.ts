@@ -132,7 +132,8 @@ export class FlowExecutor extends AKElement implements StageHost {
             AKGlobal,
             css`
                 .ak-login-container{
-                    width: 448px;
+                    width: 100%;
+                    max-width: 448px;
                 }
                 .pf-c-drawer__content > .pf-c-drawer__body{
                     background-color: #EDF1F7;
