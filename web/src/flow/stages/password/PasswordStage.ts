@@ -34,6 +34,9 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
             PFTitle,
             AKGlobal,
             css`
+                .pf-c-form{
+                    grid-gap: 16px;
+                }
                 .pf-c-login-title{
                     font-family: 'Inter';
                     font-weight: 800;
@@ -108,7 +111,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     background-color: #0a48ff;
                 }
                 .pf-c-form__group.pf-m-action{
-                    margin-top: 0;
+                    margin-top: 8px;
                 }
                 .pf-c-form__label{
                     display: flex;
