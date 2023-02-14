@@ -54,6 +54,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     margin-top: 0.25rem;
                     height: 48px !important;
                     line-height: 48px;
+                    color: #1A2138;
                 }
                 .pf-c-form-control:focus{
                     padding: 0 40px;
