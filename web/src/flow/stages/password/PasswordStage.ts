@@ -1,3 +1,5 @@
+import { FormElement } from './../../../elements/forms/FormElement';
+import { Form } from '@goauthentik/elements/forms/Form';
 import "@goauthentik/elements/EmptyState";
 import "@goauthentik/elements/forms/FormElement";
 import "@goauthentik/flow/FormStatic";
@@ -94,6 +96,10 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     line-height: 48px;
                     background-color: #3366FF;
                 }
+                .pf-c-button.pf-m-primary:disabled{
+                    background-color: rgba(51, 102, 255, 0.5);
+                    color: #FFFFFF;
+                }
                 .pf-c-button.pf-m-primary:hover, .pf-c-button.pf-m-primary:focus{
                     background-color: #0a48ff;
                 }
@@ -153,10 +159,14 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
     // 
     @property({ type: Boolean })
     hasErrors?: boolean;
+    // 
+    @property({ type: Boolean })
+    hasDisabled?: boolean;
 
     constructor() {
         super();
         this.hasErrors = false;
+        this.hasDisabled = true;
     }
 
     renderInput(): HTMLInputElement {
@@ -253,7 +263,12 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                                 autocomplete="current-password"
                                 class="pf-c-form-control"
                                 required
-                                @input=${() => {
+                                @input=${(e: InputEvent) => {
+                                    if ((e.currentTarget as HTMLInputElement).value) {
+                                        if(this.hasDisabled) this.hasDisabled = false;
+                                    } else {
+                                        if(!this.hasDisabled) this.hasDisabled = true;
+                                    }
                                     if(this.hasErrors) this.hasErrors = false;
                                 }}
                             />
@@ -266,7 +281,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         : ""}
 
                     <div class="pf-c-form__group pf-m-action">
-                        <button type="submit" class="pf-c-button pf-m-primary pf-m-block">
+                        <button type="submit" class="pf-c-button pf-m-primary pf-m-block" ?disabled=${this.hasDisabled}>
                             ${t`Continue`}
                         </button>
                     </div>
