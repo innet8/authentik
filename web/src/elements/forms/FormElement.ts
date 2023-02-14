@@ -17,13 +17,16 @@ export class FormElement extends AKElement {
             PFFormControl,
             css`
                 .pf-c-form__label-text{
-                    color: rgb(55, 65, 81);
+                    color: #53607A;
                     font-weight: 500;
-                    font-size: .875rem;
-                    line-height: 1.25rem;
                 }
                 .pf-c-form__helper-text.pf-m-error{
                     margin-bottom: 0;
+                }
+                @media (prefers-color-scheme: dark){
+                    .pf-c-form__label-text{
+                        color: var(--pf-global--palette--black-500);
+                    }
                 }
             `,
         ];

@@ -45,6 +45,11 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     padding-top: 2rem;
                     padding-bottom: 4rem;
                 }
+                @media (max-width: 767px) {
+                    .pf-c-login-title{
+                        font-size: 24px;
+                    }
+                }
                 .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
                     padding: 0 40px;
@@ -54,7 +59,12 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     margin-top: 0.25rem;
                     height: 48px !important;
                     line-height: 48px;
+                }
+                .pf-c-form-control{
                     color: #1A2138;
+                }
+                .pf-c-form-control:disabled{
+                    color: #a4a4a4;
                 }
                 .pf-c-form-control:focus{
                     padding: 0 40px;
@@ -97,12 +107,6 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                 .pf-c-form__label a{
                     color: #3366FF;
                 }
-                .pf-c-form__label .pf-c-form__label-text{
-                    color: rgb(55, 65, 81);
-                    font-weight: 500;
-                    font-size: 0.875rem;
-                    line-height: 1.25rem;
-                }
                 .input-item{
                     position: relative;
                 }
@@ -126,6 +130,18 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                 }
                 .input-item.error .last{
                     display: block;
+                }
+                .pf-c-form__label-text{
+                    color: #53607A;
+                    font-weight: 500;
+                }
+                @media (prefers-color-scheme: dark){
+                    .pf-c-login-title{
+                        color: var(--pf-global--palette--black-500);
+                    }
+                    .pf-c-form__label-text{
+                        color: var(--pf-global--palette--black-500);
+                    }
                 }
             `,
         ];

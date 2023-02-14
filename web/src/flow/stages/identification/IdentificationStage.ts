@@ -91,6 +91,11 @@ export class IdentificationStage extends BaseStage<
                     padding-top: 2rem;
                     padding-bottom: 4rem;
                 }
+                @media (max-width: 767px) {
+                    .pf-c-login-title{
+                        font-size: 24px;
+                    }
+                }
                 .pf-c-form-control, .pf-c-form-control:disabled{
                     box-shadow: 0 1px 2px 0 rgb(0, 0, 0, .05);
                     padding: 0 40px;
@@ -159,6 +164,11 @@ export class IdentificationStage extends BaseStage<
                 }
                 .input-item.error .last{
                     display: block;
+                }
+                @media (prefers-color-scheme: dark){
+                    .pf-c-login-title{
+                        color: var(--pf-global--palette--black-500);
+                    }
                 }
             `,
         );

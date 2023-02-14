@@ -131,11 +131,16 @@ export class FlowExecutor extends AKElement implements StageHost {
             PFBackgroundImage,
             AKGlobal,
             css`
-                .pf-c-drawer__body{
+                .pf-c-drawer__content > .pf-c-drawer__body{
                     background-color: #EDF1F7;
+                    padding: 0 15px;
+                }
+                @media (prefers-color-scheme: dark){
+                    .pf-c-drawer__content > .pf-c-drawer__body{
+                        background-color: var(--ak-dark-background-darker);
+                    }
                 }
                 .pf-c-login__main{
-                    background-color: #fff;
                     border-radius: 8px;
                 }
                 .pf-c-login-header{
