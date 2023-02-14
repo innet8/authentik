@@ -162,6 +162,9 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
     // 
     @property({ type: Boolean })
     hasDisabled?: boolean;
+    // 
+    @property({ attribute: false })
+    loading?: boolean;
 
     constructor() {
         super();
@@ -281,8 +284,9 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                         : ""}
 
                     <div class="pf-c-form__group pf-m-action">
-                        <button type="submit" class="pf-c-button pf-m-primary pf-m-block" ?disabled=${this.hasDisabled}>
+                        <button type="submit" class="pf-c-button pf-m-primary pf-m-block" ?disabled=${this.hasDisabled || this.loading}>
                             ${t`Continue`}
+                            ${this.loading ? html`<i class="fa fa-spinner fa-spin" style="vertical-align: -1px;margin-left: 5px;"></i>`:""}
                         </button>
                     </div>
                 </form>

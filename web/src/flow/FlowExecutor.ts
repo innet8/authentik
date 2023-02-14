@@ -269,12 +269,14 @@ export class FlowExecutor extends AKElement implements StageHost {
                 return html`<ak-stage-identification
                     .host=${this as StageHost}
                     .challenge=${this.challenge}
+                    .loading=${this.loading}
                 ></ak-stage-identification>`;
             case "ak-stage-password":
                 // Statically imported for performance reasons
                 return html`<ak-stage-password
                     .host=${this as StageHost}
                     .challenge=${this.challenge}
+                    .loading=${this.loading}
                 ></ak-stage-password>`;
             case "ak-stage-captcha":
                 // Statically imported to prevent browsers blocking urls
