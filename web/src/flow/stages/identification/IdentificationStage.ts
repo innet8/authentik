@@ -95,10 +95,12 @@ export class IdentificationStage extends BaseStage<
                     margin-bottom: 2rem;
                 }
                 .pf-c-login__main-body{
-                    padding-top: 2rem;
-                    padding-bottom: 4rem;
+                    padding: 40px;
                 }
                 @media (max-width: 767px) {
+                    .pf-c-login__main-body{
+                        padding: 40px 24px;
+                    }
                     .pf-c-login-title{
                         font-size: 24px;
                     }
@@ -113,6 +115,7 @@ export class IdentificationStage extends BaseStage<
                     height: 48px !important;
                     line-height: 48px;
                     color: #1A2138;
+                    box-shadow: none;
                 }
                 .pf-c-form-control:focus{
                     padding: 0 40px;
