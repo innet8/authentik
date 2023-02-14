@@ -136,7 +136,7 @@ export class FlowExecutor extends AKElement implements StageHost {
                 }
                 .pf-c-drawer__content > .pf-c-drawer__body{
                     background-color: #EDF1F7;
-                    padding: 0 15px;
+                    padding: 0 16px;
                 }
                 @media (prefers-color-scheme: dark){
                     .pf-c-drawer__content > .pf-c-drawer__body{
