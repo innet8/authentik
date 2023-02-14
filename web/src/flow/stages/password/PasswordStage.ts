@@ -245,7 +245,7 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     />
                     <div class="pf-c-form__group">
                         <label class="pf-c-form__label">
-                            <span class="pf-c-form__label-text">${t`Username`}</span>
+                            <span class="pf-c-form__label-text">${t`Email address`}</span>
                             <a href="${ifDefined(this.challenge.flowInfo?.cancelUrl)}">${t`Not you?`}</a>
                         </label>
                         <div class="input-item">
