@@ -69,7 +69,8 @@ export class PasswordStage extends BaseStage<PasswordChallenge, PasswordChalleng
                     color: #1A2138;
                 }
                 .pf-c-form-control:disabled{
-                    color: #a4a4a4;
+                    color: #53607A;
+                    background-color: #F7F9FC;
                 }
                 .pf-c-form-control:focus{
                     padding: 0 40px;
