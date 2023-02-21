@@ -35,7 +35,14 @@ cd web
 
 npm i
 
+用于测试
+
 npm run watch
+
+
+用于生产打包
+
+npm run build
 
 
 
